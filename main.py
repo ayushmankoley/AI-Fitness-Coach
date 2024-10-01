@@ -96,6 +96,18 @@ class WorkoutLogCreate(BaseModel):
     date: str
     calories_burned: float
 
+class WorkoutLogResponse(BaseModel):
+    id: int
+    user_id: int
+    date: str
+    calories_burned: float
+
+class WorkoutPlanResponse(BaseModel):
+    workout_plan: str
+
+class NutritionPlanResponse(BaseModel):
+    nutrition_plan: str
+
 # Create DB tables
 Base.metadata.create_all(bind=engine)
 
@@ -161,18 +173,29 @@ def signup(user: UserProfileCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(db_user)
     logger.info(f"Created user with ID: {db_user.id}")
-    return db_user
+    # Convert to dictionary to match UserProfileResponse structure
+    return UserProfileResponse(
+        id=db_user.id,
+        name=db_user.name,
+        age=db_user.age,
+        height_cm=db_user.height_cm,
+        weight_kg=db_user.weight_kg,
+        body_type=db_user.body_type,
+        activity_level=db_user.activity_level
+    )
 
-@app.get("/generate_workout/{user_id}")
+@app.get("/generate_workout/{user_id}", response_model=WorkoutPlanResponse)
 def get_workout_plan(user_id: int, db: Session = Depends(get_db)):
     profile = db.query(UserProfile).filter(UserProfile.id == user_id).first()
     if not profile:
         raise HTTPException(status_code=404, detail="User not found")
     
     workout_plan = generate_workout_plan(profile)
-    return {"workout_plan": workout_plan}
+    
+    # Return the plan wrapped in a dictionary
+    return WorkoutPlanResponse(workout_plan=workout_plan)
 
-@app.get("/generate_nutrition_plan/{user_id}")
+@app.get("/generate_nutrition_plan/{user_id}", response_model=NutritionPlanResponse)
 def get_nutrition_plan(user_id: int, db: Session = Depends(get_db)):
     profile = db.query(UserProfile).filter(UserProfile.id == user_id).first()
     if not profile:
@@ -189,7 +212,7 @@ def get_nutrition_plan(user_id: int, db: Session = Depends(get_db)):
     
     return {"nutrition_plan": nutrition_plan}
 
-@app.post("/log_workout/", response_model=WorkoutLogCreate)
+@app.post("/log_workout/", response_model=WorkoutLogResponse)
 def log_workout(log: WorkoutLogCreate, db: Session = Depends(get_db)):
     db_log = WorkoutLog(**log.dict())
     db.add(db_log)
