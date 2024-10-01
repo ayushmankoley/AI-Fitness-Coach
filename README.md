@@ -14,7 +14,7 @@ Personal Fitness Coach Powered By AI
 **Install Required Dependencies**
 
 ```bash
-  pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 **To deploy backend for this project**
@@ -22,7 +22,7 @@ Personal Fitness Coach Powered By AI
 open terminal and run
 
 ```bash
-  uvicorn main:app --reload 
+uvicorn main:app --reload 
 ```
 then open the **index.html** using a [live server](https://www.geeksforgeeks.org/how-to-enable-live-server-on-visual-studio-code/)
 
@@ -50,6 +50,11 @@ then open the **index.html** using a [live server](https://www.geeksforgeeks.org
 - Database: SQLite
 - Frontend: HTML5, CSS3, Vanilla JavaScript
 - AI Model: llama3.2 (via Ollama client)
+## Authors
+
+- [@ayushmankoley](https://github.com/ayushmankoley)
+- [@manishburnwal](https://github.com/manishburnwal/)
+- [@mayank9142](https://github.com/mayank9142)
 ## Contributors
 
 <a href="https://github.com/ayushmankoley/AI-Fitness-Coach/graphs/contributors">
