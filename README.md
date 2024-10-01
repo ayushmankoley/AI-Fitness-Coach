@@ -19,7 +19,7 @@ Personal Fitness Coach Powered By AI
 
 **To deploy backend for this project**
 
-open **main.py** and run
+open terminal and run
 
 ```bash
   uvicorn main:app --reload 
