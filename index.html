@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Plan Recommender</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Fitness Plan Recommender</h1>
+        <nav>
+            <ul>
+                <li><a href="#" data-page="signup">Generate User ID</a></li>
+                <li><a href="#" data-page="workout">Generate Workout Plan</a></li>
+                <li><a href="#" data-page="nutrition">Generate Nutrition Plan</a></li>
+                <li><a href="#" data-page="log-workout">Log Workout</a></li>
+            </ul>
+        </nav>
+
+        <div id="signup" class="page">
+            <h2>Sign Up</h2>
+            <form id="signupForm">
+                <label for="signupName">Name:</label>
+                <input type="text" id="signupName" required>
+                
+                <label for="signupAge">Age:</label>
+                <input type="number" id="signupAge" required>
+                
+                <label for="signupHeight">Height (cm):</label>
+                <input type="number" id="signupHeight" step="0.1" required>
+                
+                <label for="signupWeight">Weight (kg):</label>
+                <input type="number" id="signupWeight" step="0.1" required>
+                
+                <label for="signupBodyType">Body Type:</label>
+                <select id="signupBodyType" required>
+                    <option value="Ectomorph">Ectomorph</option>
+                    <option value="Mesomorph">Mesomorph</option>
+                    <option value="Endomorph">Endomorph</option>
+                </select>
+                
+                <label for="signupActivityLevel">Activity Level:</label>
+                <select id="signupActivityLevel" required>
+                    <option value="Sedentary">Sedentary</option>
+                    <option value="Light">Light</option>
+                    <option value="Moderate">Moderate</option>
+                    <option value="Active">Active</option>
+                    <option value="Athlete">Athlete</option>
+                </select>
+                
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+
+        <div id="workout" class="page">
+            <h2>Generate Workout Plan</h2>
+            <form id="workoutForm">
+                <label for="user_id">Enter your User ID:</label>
+                <input type="number" id="user_id" required>
+                <button type="submit">Generate Workout Plan</button>
+            </form>
+            <div id="workoutPlan"></div>
+        </div>
+
+        <div id="nutrition" class="page">
+            <h2>Generate Nutrition Plan</h2>
+            <form id="nutritionForm">
+                <label for="user_id_nutrition">Enter your User ID:</label>
+                <input type="number" id="user_id_nutrition" required>
+                <button type="submit">Generate Nutrition Plan</button>
+            </form>
+            <div id="nutritionPlan"></div>
+        </div>
+
+        <div id="log-workout" class="page">
+            <h2>Log Your Workout</h2>
+            <form id="logWorkoutForm">
+                <label for="workout_user_id">User ID:</label>
+                <input type="number" id="workout_user_id" required>
+                
+                <label for="workout_date">Date:</label>
+                <input type="date" id="workout_date" required>
+                
+                <label for="calories_burned">Calories Burned:</label>
+                <input type="number" id="calories_burned" step="0.1" required>
+                
+                <button type="submit">Log Workout</button>
+            </form>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
